@@ -10,6 +10,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AppConfig } from './common';
 import { AwsSESModule } from './common/modules/aws-ses';
 import { EmailService } from './common/services/email.service';
+import { OrganizationModule } from './modules/organization/organization.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { EmailService } from './common/services/email.service';
       }),
       inject: [ConfigService],
     }),
+    OrganizationModule,
   ],
 
   providers: [AppConfig, EmailService],

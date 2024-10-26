@@ -77,6 +77,6 @@ async function bootstrap(swaggerConfig: SwaggerModuleConfig) {
     },
   });
 
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap({ enabled: true, config: { version: '1.0.0' } });

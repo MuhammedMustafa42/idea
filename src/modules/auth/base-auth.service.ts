@@ -31,6 +31,7 @@ export class BaseAuthService {
         $project: {
           _id: 1,
           email: 1,
+          accessLevel: 1,
         },
       },
     ]);
@@ -52,7 +53,7 @@ export class BaseAuthService {
     if (!existingSessionId) sessionId = await this.createSession(user);
 
     const token = this.jwtService.sign(
-      { _id: userId, sessionId },
+      { _id: userId, sessionId, accessLevel: user.accessLevel },
       {
         secret: this.appConfig.USER_JWT_SECRET,
         expiresIn: this.appConfig.USER_JWT_EXPIRY,

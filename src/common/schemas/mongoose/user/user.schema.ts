@@ -20,6 +20,12 @@ export const UserSchema = new Schema<User, IUserModel, IUserInstanceMethods>(
       type: String,
       required: true,
     },
+
+    accessLevel: {
+      type: String,
+      required: false,
+      default: 'two',
+    },
   },
   {
     timestamps: true,

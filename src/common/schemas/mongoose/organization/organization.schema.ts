@@ -43,7 +43,7 @@ export function organizationSchemaFactory(connection: Connection) {
   });
 
   const organizationModel = connection.model(
-    ModelNames.USER,
+    ModelNames.ORGANIZATION,
     OrganizationSchema,
   );
 
