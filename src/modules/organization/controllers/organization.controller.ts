@@ -15,6 +15,7 @@ import { CustomResponse } from 'src/common/classes';
 import { UpdateOrganizationDto } from '../dto/update-organization.dto';
 import { CreateOrganizationDto } from '../dto/create-organization.dto';
 import { AccessLevel, AccessLevelGuard } from '../guards/access-level.guard';
+import { InviteUserDto } from '../dto/invite-user.dto';
 
 @Controller('organization')
 @ApiTags('organization')
@@ -98,7 +99,7 @@ export class OrganizationController {
   @Post('user/private/organizations/:organizationId/invite')
   async inviteUserToOrganization(
     @Param('organizationId') organizationId: string,
-    @Body() body: { email: string },
+    @Body() body: InviteUserDto,
   ) {
     const result = await this.organizationService.inviteUserToOrganization(
       organizationId,

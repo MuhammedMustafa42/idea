@@ -22,7 +22,7 @@ export class Organization {
   @IsInstance(Types.ObjectId, { each: true })
   @TransformObjectIds()
   @IsOptional()
-  memebers?: Types.ObjectId[];
+  members?: Types.ObjectId[];
 }
 
 export interface IOrganizationModel

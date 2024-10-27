@@ -15,7 +15,7 @@ export const OrganizationSchema = new Schema<Organization, IOrganizationModel>(
       required: true,
     },
 
-    memebers: {
+    members: {
       type: [Schema.Types.ObjectId],
       required: false,
       ref: ModelNames.USER,

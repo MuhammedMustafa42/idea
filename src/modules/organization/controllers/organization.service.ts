@@ -7,6 +7,7 @@ import { CustomError } from 'src/common/classes';
 import { ErrorType } from 'src/common';
 import { UpdateOrganizationDto } from '../dto/update-organization.dto';
 import { IUserModel } from 'src/common/schemas/mongoose/user/user.type';
+import { InviteUserDto } from '../dto/invite-user.dto';
 
 @Injectable()
 export class OrganizationService {
@@ -38,6 +39,7 @@ export class OrganizationService {
               $project: {
                 name: 1,
                 email: 1,
+                accessLevel: 1,
               },
             },
           ],
@@ -48,7 +50,7 @@ export class OrganizationService {
         $project: {
           name: 1,
           description: 1,
-          memebers: 1,
+          members: 1,
         },
       },
     ]);
@@ -73,6 +75,7 @@ export class OrganizationService {
               $project: {
                 name: 1,
                 email: 1,
+                accessLevel: 1,
               },
             },
           ],
@@ -83,7 +86,7 @@ export class OrganizationService {
         $project: {
           name: 1,
           description: 1,
-          memebers: 1,
+          members: 1,
         },
       },
     ]);
@@ -150,10 +153,7 @@ export class OrganizationService {
     });
   }
 
-  async inviteUserToOrganization(
-    organizationId: string,
-    body: { email: string },
-  ) {
+  async inviteUserToOrganization(organizationId: string, body: InviteUserDto) {
     const organization = await this.organizationModel.findById(organizationId);
 
     if (!organization) {
@@ -184,7 +184,7 @@ export class OrganizationService {
       );
     }
 
-    organization.memebers.push(user._id);
+    organization.members.push(user._id);
     await organization.save();
   }
 }

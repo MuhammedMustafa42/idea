@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - my-network
+
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - NODE_ENV=dev
+    volumes:
+      - .:/src/app
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - my-network
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+    command: mongod --wiredTigerCacheSizeGB=1 --quiet
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+
+volumes:
+  mongodb_data:
+    driver: local
+    
+networks:
+  my-network:
+    driver: bridge
