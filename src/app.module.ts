@@ -24,6 +24,8 @@ import { OrganizationModule } from './modules/organization/organization.module';
           config: {
             host: configService.get<string>('REDIS_HOST') ?? 'redis',
             port: Number(configService.get<string>('REDIS_PORT')),
+            username: configService.get<string>("REDIS_USER"),
+            password: configService.get<string>("REDIS_PW",)
           },
         };
       },

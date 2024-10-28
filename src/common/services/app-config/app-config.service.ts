@@ -22,6 +22,8 @@ export class AppConfig {
 
   REDIS_HOST: string = this.configService.get('REDIS_HOST');
   REDIS_PORT: number = this.configService.get('REDIS_PORT');
+  REDIS_USER: number = this.configService.get('REDIS_USER');
+  REDIS_PW: number = this.configService.get('REDIS_PW');
 
   get UPTIME() {
     return process.uptime();
